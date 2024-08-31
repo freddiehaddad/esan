@@ -1,0 +1,15 @@
+failover
+
+target 1
+https://dataexplorer.azure.com/dashboards/83d871e9-cd7f-47fc-9a68-fb5a0d8ff1cb?p-_startTime=2024-08-26T19-07-00Z&p-_endTime=2024-08-26T19-17-00Z&p-_vm_name=v-spdk-target1&p-_subscription_id=v-1a58628a-3aa1-4ed2-b89d-abf073ad7c1c&p-_container_id=v-1df430a1-d5bf-478a-9b67-e24a3e5da199&p-_disk_id=all&p-_node_id=v-9f8c229a-2c4f-bb8e-e311-cc22fd4a5ac3&p-_op_type=all&p-_layer=v-backend&p-_layer=v-vdc_lower&p-_layer=v-vdc_upper&p-_io_size=all&p-_min_count=v-10&p-_include_bss_on_write=v-false&p-_activity_id=all&p-_perfrun_id=all#3136346b-28c2-4560-8f78-dbb02bf9e23a
+
+target 2
+https://dataexplorer.azure.com/dashboards/83d871e9-cd7f-47fc-9a68-fb5a0d8ff1cb?p-_startTime=2024-08-26T19-07-00Z&p-_endTime=2024-08-26T19-17-00Z&p-_vm_name=v-spdk-target2&p-_subscription_id=v-1a58628a-3aa1-4ed2-b89d-abf073ad7c1c&p-_container_id=v-be29b467-7278-462e-aa54-8a3bca203534&p-_disk_id=all&p-_node_id=v-51825cb6-eed9-043b-010f-d4eb9b8ac602&p-_op_type=all&p-_layer=v-backend&p-_layer=v-vdc_lower&p-_layer=v-vdc_upper&p-_io_size=all&p-_min_count=v-10&p-_include_bss_on_write=v-false&p-_activity_id=all&p-_perfrun_id=all#3136346b-28c2-4560-8f78-dbb02bf9e23a
+
+multipath
+
+target 1
+https://dataexplorer.azure.com/dashboards/83d871e9-cd7f-47fc-9a68-fb5a0d8ff1cb?p-_startTime=2024-08-26T20-06-00Z&p-_endTime=2024-08-26T20-16-00Z&p-_vm_name=v-spdk-target1&p-_subscription_id=v-1a58628a-3aa1-4ed2-b89d-abf073ad7c1c&p-_container_id=v-1df430a1-d5bf-478a-9b67-e24a3e5da199&p-_disk_id=all&p-_node_id=v-9f8c229a-2c4f-bb8e-e311-cc22fd4a5ac3&p-_op_type=all&p-_layer=v-backend&p-_layer=v-vdc_lower&p-_layer=v-vdc_upper&p-_io_size=all&p-_min_count=v-10&p-_include_bss_on_write=v-false&p-_activity_id=all&p-_perfrun_id=all#3136346b-28c2-4560-8f78-dbb02bf9e23a
+
+target 2
+https://dataexplorer.azure.com/dashboards/83d871e9-cd7f-47fc-9a68-fb5a0d8ff1cb?p-_startTime=2024-08-26T20-06-00Z&p-_endTime=2024-08-26T20-16-00Z&p-_vm_name=v-spdk-target2&p-_subscription_id=v-1a58628a-3aa1-4ed2-b89d-abf073ad7c1c&p-_container_id=v-be29b467-7278-462e-aa54-8a3bca203534&p-_disk_id=all&p-_node_id=v-51825cb6-eed9-043b-010f-d4eb9b8ac602&p-_op_type=all&p-_layer=v-backend&p-_layer=v-vdc_lower&p-_layer=v-vdc_upper&p-_io_size=all&p-_min_count=v-10&p-_include_bss_on_write=v-false&p-_activity_id=all&p-_perfrun_id=all#3136346b-28c2-4560-8f78-dbb02bf9e23a
