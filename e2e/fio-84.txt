@@ -1,0 +1,42 @@
+[fhaddad@spdk-multipath-initiator ~]$ timedatectl
+               Local time: Thu 2024-09-05 21:22:54 UTC
+           Universal time: Thu 2024-09-05 21:22:54 UTC
+                 RTC time: Thu 2024-09-05 21:22:54
+                Time zone: Etc/UTC (UTC, +0000)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+
+[fhaddad@spdk-multipath-initiator ~]$ sudo fio --filename=/dev/nvme1n1 --rw=write --direct=1 --bs=8K --ioengine=libaio --runtime=300 --time_based --group_reporting --name=seq_write --numjobs=8 --iodepth=4
+seq_write: (g=0): rw=write, bs=(R) 8192B-8192B, (W) 8192B-8192B, (T) 8192B-8192B, ioengine=libaio, iodepth=4
+...
+fio-3.35
+Starting 8 processes
+Jobs: 8 (f=8): [W(8)][100.0%][w=635MiB/s][w=81.3k IOPS][eta 00m:00s]
+seq_write: (groupid=0, jobs=8): err= 0: pid=183230: Thu Sep  5 21:28:03 2024
+  write: IOPS=78.1k, BW=610MiB/s (640MB/s)(179GiB/300001msec); 0 zone resets
+    slat (nsec): min=1277, max=217935, avg=5450.21, stdev=1800.02
+    clat (usec): min=231, max=16583, avg=403.74, stdev=115.04
+     lat (usec): min=259, max=16586, avg=409.19, stdev=115.02
+    clat percentiles (usec):
+     |  1.00th=[  293],  5.00th=[  306], 10.00th=[  314], 20.00th=[  330],
+     | 30.00th=[  347], 40.00th=[  359], 50.00th=[  379], 60.00th=[  400],
+     | 70.00th=[  424], 80.00th=[  465], 90.00th=[  529], 95.00th=[  586],
+     | 99.00th=[  709], 99.50th=[  766], 99.90th=[  938], 99.95th=[ 1123],
+     | 99.99th=[ 3523]
+   bw (  KiB/s): min=513536, max=711312, per=100.00%, avg=625397.01, stdev=3993.53, samples=4792
+   iops        : min=64192, max=88914, avg=78174.58, stdev=499.19, samples=4792
+  lat (usec)   : 250=0.01%, 500=86.35%, 750=13.03%, 1000=0.55%
+  lat (msec)   : 2=0.05%, 4=0.01%, 10=0.01%, 20=0.01%
+  cpu          : usr=0.82%, sys=6.01%, ctx=20871000, majf=0, minf=245
+  IO depths    : 1=0.1%, 2=0.1%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=0,23442081,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=4
+
+Run status group 0 (all jobs):
+  WRITE: bw=610MiB/s (640MB/s), 610MiB/s-610MiB/s (640MB/s-640MB/s), io=179GiB (192GB), run=300001-300001msec
+
+Disk stats (read/write):
+  nvme1n1: ios=49/23432799, merge=0/0, ticks=564/9421481, in_queue=9422045, util=100.00%
