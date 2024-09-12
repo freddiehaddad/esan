@@ -13,7 +13,8 @@ sudo modprobe nbd
 
 ## Target VM
 
-SPDK uses a unique partition type GUID that exposes the bdev as a Linux block device via NBD.  Once a partition is created and the partition type GUID set, it will be automatically exposed as `nvme0n1p1` in SPDK applications.
+> [!NOTE]
+> SPDK uses a unique partition type GUID that exposes the bdev as a Linux block device via NBD.  Once a partition is created and the partition type GUID set, it will be automatically exposed as `nvme0n1p1` in SPDK applications.
 
 Run the following commands:
 
