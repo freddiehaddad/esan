@@ -2,9 +2,16 @@
 
 pushd /opt/spdk/
 
-IP=$(ip address show dev eth0 | grep -oP "inet \K\d+.\d+.\d+.\d+") && echo $IP
+sudo ./scripts/setup.sh
+sudo ./build/bin/nvmf_tgt -m 0xfffff &
+
+IP=$(ip address show dev eth0 | grep -oP "inet \K\d+.\d+.\d+.\d+")
 PORT=4420
 NQN="nqn.2024-09.io.spdk:cnode0"
+
+echo "  IP: $IP"
+echo "PORT: $PORT"
+echo " NQN: $NQN"
 
 sudo ./scripts/rpc.py nvmf_create_transport -t tcp -o -u 8192
 sudo ./scripts/rpc.py nvmf_create_subsystem $NQN -a -s SPDK00000000000001 -r
