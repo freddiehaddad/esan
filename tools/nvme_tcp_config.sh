@@ -18,15 +18,18 @@
 
 # Name of the executable script.
 EXECUTABLE="$(basename "$0")"
-# Network port to listen on
-PORT=4420
 # Device to share
-DEVICE="/dev/nvme0n1"
+DEVICE="/dev/nvme0n2"
+# Subsystem name
+SUBSYS_NAME="nvmet"
 # Subsystem path
 SUBSYS_ID=1
 # IP address
 IP=$(hostname -I | awk '{print $1}')
 # Getopts
+# Network port to listen on
+PORT=4420
+
 OPTSTRING=":d:i:p:s:h"
 while getopts "$OPTSTRING" option; do
 	case "$option" in
@@ -54,6 +57,8 @@ while getopts "$OPTSTRING" option; do
 		printf "           (default: %s)\n" "$IP"
 		printf " -p        network port to listen on\n"
 		printf "           (default: %d)\n" "$PORT"
+		printf " -n        subsystem name\n"
+		printf "           (default: %s)\n" "$SUBSYS_NAME"
 		printf " -s        subsystem ID\n"
 		printf "           (default: %d)\n" "$SUBSYS_ID"
 		exit 0
@@ -81,9 +86,11 @@ for module in nvmet nvmet-tcp; do
 done
 
 # Create NVMe subsystem
-SUBSYS_PATH="/sys/kernel/config/nvmet/subsystems/nvmet-test$SUBSYS_ID"
+SUBSYS_PATH="/sys/kernel/config/nvmet/subsystems/$SUBSYS_NAME$SUBSYS_ID"
+echo "Subsystem Path:"
+echo "$SUBSYS_PATH"
 if ! mkdir -p "$SUBSYS_PATH"; then
-	printf "Failed to create subsystem directory \"%s\"\n" "$SUBSYS_PATH"
+	printf "Failed to create subsystem directory \"%s\"\n" "$SUBSYS_NAME$SUBSYS_PATH"
 	exit 1
 fi
 
@@ -95,6 +102,8 @@ fi
 
 # Create namespace directory
 NS_PATH="$SUBSYS_PATH/namespaces/$SUBSYS_ID"
+echo "Namspace Path:"
+echo "$NS_PATH"
 if ! mkdir -p "$NS_PATH"; then
 	printf "Failed to create namespace directory: \"%s\"\n" "$NS_PATH"
 	exit 1
@@ -114,6 +123,8 @@ fi
 
 # Create NVMe port directory
 PORT_PATH="/sys/kernel/config/nvmet/ports/$SUBSYS_ID"
+echo "Port Path:"
+echo "$PORT_PATH"
 if ! mkdir -p "$PORT_PATH"; then
 	printf "Failed to create port directory: \"%s\"\n" "$PORT_PATH"
 	exit 1
@@ -150,7 +161,7 @@ if ! echo "ipv4" >"$PORT_PATH/addr_adrfam"; then
 fi
 
 # Link subsystem to port
-if ! ln -s "$SUBSYS_PATH" "$PORT_PATH/subsystems/nvmet-test$SUBSYS_ID"; then
+if ! ln -s "$SUBSYS_PATH" "$PORT_PATH/subsystems/$SUBSYS_NAME$SUBSYS_ID"; then
 	printf "Failed to link subsystem to port\n"
 	exit 1
 fi
